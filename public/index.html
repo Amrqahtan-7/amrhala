@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>amrhala - Book a Table</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="header">
+      <div class="logo">amrhala</div>
+      <p class="tagline">Reserve your table in seconds</p>
+    </header>
+
+    <main class="card" id="booking-card">
+      <h2 class="card-title">Book a Table</h2>
+
+      <form id="booking-form" novalidate>
+        <div class="field">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="e.g. Ahmed Ali" required autocomplete="name" />
+          <span class="field-error" id="name-error"></span>
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="e.g. +923001234567" required autocomplete="tel" />
+          <span class="field-error" id="phone-error"></span>
+        </div>
+
+        <div class="field">
+          <label for="slot">Select Time</label>
+          <select id="slot" required>
+            <option value="" disabled selected>Loading available times...</option>
+          </select>
+          <span class="field-error" id="slot-error"></span>
+        </div>
+
+        <div class="form-error" id="form-error"></div>
+
+        <button type="submit" class="btn-submit" id="submit-btn">Confirm Booking</button>
+      </form>
+    </main>
+
+    <div class="card success-card hidden" id="success-card">
+      <div class="success-icon">&#10003;</div>
+      <h2>Booking Confirmed!</h2>
+      <p id="success-message"></p>
+      <button class="btn-secondary" onclick="location.reload()">Make Another Booking</button>
+    </div>
+
+    <div class="no-slots hidden" id="no-slots">
+      <p>No more time slots available today.</p>
+      <p>Please call us to make a reservation.</p>
+    </div>
+
+    <footer class="footer">
+      <p>&copy; 2026 amrhala Restaurant. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script src="customer.js"></script>
+</body>
+</html>
