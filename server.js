@@ -4,6 +4,10 @@ const path = require('path');
 const { insertBooking, getAllBookings } = require('./db');
 const { sendNotifications } = require('./notifications');
 const authMiddleware = require('./middleware/auth');
+const { initWhatsApp } = require('./whatsapp');
+
+// Start WhatsApp client (shows QR code in terminal on first run)
+initWhatsApp();
 
 const app = express();
 const PORT = process.env.PORT || 8080;

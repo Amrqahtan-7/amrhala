@@ -1,5 +1,7 @@
 const nodemailer = require('nodemailer');
-const axios = require('axios');
+const { sendMessage } = require('./whatsapp');
+
+const OWNER_WHATSAPP = '923443544447@c.us';
 
 function formatDateTime(isoString) {
   const d = new Date(isoString);
@@ -7,23 +9,14 @@ function formatDateTime(isoString) {
 }
 
 async function sendWhatsApp(booking) {
-  const apiKey = process.env.CALLMEBOT_APIKEY;
-  if (!apiKey || apiKey === 'YOUR_CALLMEBOT_KEY_HERE') {
-    console.log('[WhatsApp] CALLMEBOT_APIKEY not configured, skipping.');
-    return;
-  }
-
   const message =
     `New Booking - amrhala Restaurant\n` +
     `Name: ${booking.name}\n` +
     `Phone: ${booking.phone}\n` +
-    `Slot: ${booking.slot_time}\n` +
+    `Time Slot: ${booking.slot_time}\n` +
     `Submitted: ${formatDateTime(booking.created_at)}`;
 
-  const url = `https://api.callmebot.com/whatsapp.php?phone=%2B923443544447&text=${encodeURIComponent(message)}&apikey=${apiKey}`;
-
-  const response = await axios.get(url, { timeout: 10000 });
-  console.log('[WhatsApp] Sent:', response.status);
+  await sendMessage(OWNER_WHATSAPP, message);
 }
 
 async function sendEmail(booking) {
